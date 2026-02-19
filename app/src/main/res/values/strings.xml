@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    strings.xml — all user-visible text lives here.
+    Web analogy: i18n / translation JSON files.
+    Reference in XML as @string/name, in Kotlin as getString(R.string.name)
+-->
+<resources>
+    <string name="app_name">GlitchGL</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="glitch_default">Glitch: 30%</string>
+    <string name="intensity_label">Glitch: %d%%</string>
+</resources>
