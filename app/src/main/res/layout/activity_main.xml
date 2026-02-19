@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_main.xml — the UI layout for MainActivity.
+
+    Web analogy: this is your index.html body content.
+    ConstraintLayout is like CSS Flexbox/Grid — children are positioned
+    relative to each other or the parent edges using constraints.
+
+    Structure:
+      ┌─────────────────────────┐
+      │   GlitchGLSurfaceView   │  ← fills all space above the bottom bar
+      │   (OpenGL canvas)       │
+      ├─────────────────────────┤
+      │  [Pick Image]  Glitch:  │  ← bottom controls bar
+      │  seekbar ███████░░░ 30% │
+      └─────────────────────────┘
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!--
+        GlitchGLSurfaceView — the OpenGL rendering surface.
+        Constrained to fill from top down to the control bar.
+        Like a <canvas> that stretches to fill available space.
+    -->
+    <com.example.glitchgl.GlitchGLSurfaceView
+        android:id="@+id/glitchGLSurface"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/controlBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--
+        Control bar — sits at the bottom of the screen.
+        Contains the image picker button, intensity label, and seekbar.
+    -->
+    <LinearLayout
+        android:id="@+id/controlBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/controlBarBackground"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Row 1: Pick image button + intensity label side by side -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/pickImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_image"
+                android:textSize="13sp"
+                android:backgroundTint="@color/accent"
+                android:textColor="@color/white"
+                style="@style/Widget.MaterialComponents.Button" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/intensityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glitch_default"
+                android:textColor="@color/textPrimary"
+                android:textSize="14sp"
+                android:fontFamily="monospace" />
+
+        </LinearLayout>
+
+        <!-- Row 2: Intensity seekbar -->
+        <!-- Like <input type="range"> -->
+        <SeekBar
+            android:id="@+id/intensitySeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="30"
+            android:progressTint="@color/accent"
+            android:thumbTint="@color/accent" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
